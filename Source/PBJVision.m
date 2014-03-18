@@ -155,6 +155,7 @@ enum
 @synthesize cameraMode = _cameraMode;
 @synthesize focusMode = _focusMode;
 @synthesize flashMode = _flashMode;
+@synthesize mirrorCameraOutputMode = _mirrorCameraOutputMode;
 @synthesize outputFormat = _outputFormat;
 @synthesize context = _context;
 @synthesize presentationFrame = _presentationFrame;
@@ -740,7 +741,20 @@ typedef void (^PBJVisionBlock)();
 
     // setup video connection
     AVCaptureConnection *videoConnection = [_captureOutputVideo connectionWithMediaType:AVMediaTypeVideo];
-
+    
+    // setup video mirroring
+    videoConnection.videoMirrored = NO;
+    if (_cameraDevice == PBJCameraDeviceBack) {
+        if (_mirrorCameraOutputMode == PBJMirrorCameraOutputModeBack || _mirrorCameraOutputMode == PBJMirrorCameraOutputModeFrontAndBack) {
+            videoConnection.videoMirrored = YES;
+        }
+    } else {
+        if (_mirrorCameraOutputMode == PBJMirrorCameraOutputModeFront || _mirrorCameraOutputMode == PBJMirrorCameraOutputModeFrontAndBack) {
+            videoConnection.videoMirrored = YES;
+        }
+    }
+    
+    
     // setup input/output
     
     NSString *sessionPreset = _captureSessionPreset;

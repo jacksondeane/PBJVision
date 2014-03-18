@@ -39,6 +39,13 @@ typedef NS_ENUM(NSInteger, PBJFlashMode) {
     PBJFlashModeAuto = AVCaptureFlashModeAuto
 };
 
+typedef NS_ENUM(NSInteger, PBJMirrorCameraOutputMode) {
+    PBJMirrorCameraOutputModeNone,
+    PBJMirrorCameraOutputModeFrontAndBack,
+    PBJMirrorCameraOutputModeBack,
+    PBJMirrorCameraOutputModeFront
+};
+
 typedef NS_ENUM(NSInteger, PBJAuthorizationStatus) {
     PBJAuthorizationStatusNotDetermined = 0,
     PBJAuthorizationStatusAuthorized,
@@ -87,6 +94,7 @@ extern NSString * const PBJVisionVideoThumbnailKey;
 
 @property (nonatomic) PBJFlashMode flashMode; // flash and torch
 @property (nonatomic, readonly, getter=isFlashAvailable) BOOL flashAvailable;
+@property (nonatomic) PBJMirrorCameraOutputMode mirrorCameraOutputMode;
 
 // video output/compression settings
 
